@@ -6,6 +6,13 @@ class Location(models.Model):
     def __str__(self):
         return self.name
 
+    def save_location(self):
+        self.save()
+
+    def delete_location(self):
+        self.delete()
+    
+
 class Category(models.Model):
     name = models.CharField(max_length=30)
 
@@ -18,7 +25,7 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-lass Image(models.Model):
+class Image(models.Model):
     title = models.CharField(max_length=30)
     description = models.TextField()
     location = models.ForeignKey(Location)
@@ -54,8 +61,3 @@ lass Image(models.Model):
         image = cls.objects.get(id=id)
         return image
 
-    @classmethod
-    def filter_by_location(cls, search_term):
-       location = Location.objects.get(name=search_term)
-       images = cls.objects.filter(location=location)
-       return images
