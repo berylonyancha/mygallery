@@ -53,3 +53,9 @@ lass Image(models.Model):
     def get_image_by_id(cls, id):
         image = cls.objects.get(id=id)
         return image
+
+    @classmethod
+    def filter_by_location(cls, search_term):
+       location = Location.objects.get(name=search_term)
+       images = cls.objects.filter(location=location)
+       return images
